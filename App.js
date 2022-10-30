@@ -1,75 +1,49 @@
-import React, {useState} from "react"
-import axios from "axios"
+import './App.css';
+import React from "react";
 
-function App() {
-  const [data,setdata] = useState({})
-  const [location, setLocation] = useState("")
+import Navbar from './components/Navabar';
+import Hero from './components/Hero';
+import About from './components/About';
+import Service from './components/service';
+import Portfolio from './components/portfolio';
 
- 
-  const searchLocation = (event) =>{
-     const URL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=95d055bd1640656f2a33964d628ddf99`
-    if (event.key  === "Enter")
-    {
-      axios.get(URL).then((Response) => {
-        setdata(Response.data)
-        console.log(Response.data)
-      })
-    }
-  }
+import Pricing from './components/Pricing';
+import Contact from './components/Contact';
+import Image from './components/Image';
+//// component function name 1st letter is always capital
+// function Welcome() {
+//   return <h5>Welcome back Vrushabh</h5>
+// }
+
+// function App() {
+//   return (
+//     <div className="App">
+//       < Navbar />
+//       < Hero />
+//       < About />
+//       {/* < Welcome/> */}
+
+
+//     </div>
+//   );
+// }
+
+// flat arrow function 
+const App = () => {
   return (
-    <div className="app">
-      <div className="search">
-        <input 
-        value={location}
-        onChange={event => setLocation(event.target.value)}
-        onKeyPress={searchLocation}
-          placeholder = "Enter location"
-          type="text"/>
-     </div>
-      <div className="container">
-        <div className="top">
-          <div className="location">
-            <p>{data.name}</p>
-          </div>
-          <div className="temp">
-            {data.main ? <h1>{data.main.temp.tofixed()}°F</h1> : null}
-          </div>
-          <div className="description">
-            {data.weather ? <p>{data.weather[0].main}</p> : null}
-          </div>
-        </div>
+    <div className="App">
+      < Navbar />
+      < Hero />
+      < About />
+      < Service />
+      < Portfolio />
+      < Pricing />
+      < Contact />
+      < Image />
+      {/* < Welcome/> */}
 
-{data.name !== undefined &&
- <div className="bottom">
- <div className="feels">
-   <p>Feels Like</p>
- {data.main ? <p className="bold">{data.main.feels_like.toFixed()}°F</p>  : null }
- </div>
- 
-  <div className="sunrise">
-   {data.timezone ? <p className="bold">{data.timezone.Sunrise}</p>  : null }
-   <p>Sunrise {new Date(data.sys.sunrise * 1000).toLocaleTimeString('en-IN')}</p>
-   </div>
 
-   <div className="sunset">
-   {data.timezone ? <p className="bold">{data.timezone.Sunset}</p>  : null }
-   <p>Sunrise {new Date(data.sys.sunset * 1000).toLocaleTimeString('en-IN')}</p>
-   </div>
-   
- <div className="humidity"> 
- <p>Humidity</p>
- {data.main ? <p className="bold">{data.main.humidity}%</p>  : null }
- </div>
- <div className="wind">
-   <p>Wind Speed</p>
-   {data.wind ? <p className="bold">{data.wind.speed.toFixed()}MPH</p>  : null }
- </div>
-</div>
-}
-      </div>
-      
     </div>
-    
   );
 }
 
